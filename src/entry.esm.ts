@@ -1,4 +1,5 @@
 import { App, Plugin } from "vue";
+export * from "./types";
 
 // Import vue component
 import component from "@/RadialProgressBar.vue";
