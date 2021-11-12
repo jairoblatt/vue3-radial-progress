@@ -2,39 +2,44 @@
   <div class="input">
     <span v-if="title" class="text-settings">{{ title }}</span>
     <div class="input-content">
-      <input type="text" :value="value" @input="onInput($event.target.value)" />
-      <div class="input-actions">
-        <button data-testid="btn-increment" size="18" icon="mdi mdi-menu-up" @click="operation('increment')" />
-        <button data-testid="btn-decrement" size="18" icon="mdi mdi-menu-down" @click="operation('decrement')" />
+      <input type="text" :value="modelValue" />
+
+      <div class="input__actions">
+        <button size="18" icon="mdi mdi-menu-up" @click="handle++">
+          <img src="../assets/chevron.svg" alt="Increment icon" />
+        </button>
+
+        <button size="18" icon="mdi mdi-menu-down" @click="handle--">
+          <img src="../assets/chevron.svg" alt="Decrement icon" />
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, computed } from "vue";
 
 export default defineComponent({
-  emits: ["updateModel"],
+  emits: ["update:modelValue"],
 
   props: {
-    value: {
+    modelValue: {
       type: Number as PropType<number>,
       default: 0,
     },
     title: String as PropType<string>,
   },
 
-  methods: {
-    operation(operation: string) {
-      let value = this.value;
-      let model = operation === "increment" ? ++value : --value;
-      if (model >= 1) this.onInput(model);
-    },
+  setup(props, context) {
+    const handle = computed({
+      get: () => props.modelValue,
+      set: (modelValue) => context.emit("update:modelValue", modelValue),
+    });
 
-    onInput(value: unknown) {
-      this.$emit("updateModel", Number(value) || this.value);
-    },
+    return {
+      handle,
+    };
   },
 });
 </script>
@@ -47,32 +52,51 @@ export default defineComponent({
 .input-content {
   display: flex;
   align-items: center;
+  position: relative;
 }
 .input span {
-  margin: 0;
-  margin-bottom: 2rem;
-  padding: 0;
-  display: inline-flex;
+  margin-bottom: 0.5rem;
 }
-.input input {
+
+.input-content input {
   outline: none;
   border: none;
-  border-radius: 10px;
-  padding: 0;
-  padding-left: 2rem;
-  width: 55px;
-  height: 38px;
-  background: #ffffff;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: 1rem;
+  padding-left: 1rem;
+  height: 40px;
+  width: 100px;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.103);
+  color: white;
 }
-.input input[type="text"] {
-  font-weight: 300;
-  color: gray;
-}
-.input-actions {
+
+.input__actions {
   display: flex;
   flex-direction: column;
 }
-.input-actions .btn >>> i:hover {
-  color: rgb(100, 100, 100);
+
+.input__actions button {
+  outline: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: ease-in 0.05s;
+}
+.input__actions button:hover {
+  background: rgba(255, 255, 255, 0.048);
+}
+
+.input__actions button img {
+  filter: invert(1);
+}
+
+.input__actions button:first-child img {
+  transform: rotate(90deg);
+}
+
+.input__actions button:last-child img {
+  transform: rotate(270deg);
 }
 </style>
