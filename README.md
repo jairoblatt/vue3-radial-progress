@@ -1,14 +1,14 @@
-<h1 align="center">Vue 3 Radial Progress</h1>
-
-  <img src="https://snyk.io/test/github/jairoblatt/vue-material-tabs/badge.svg" alt="Vulnerabilities">
+<img src="https://raw.githubusercontent.com/jairoblatt/vue3-radial-progress/master/demo/assets/demo-1.png?token=AKYEY6RBP5QZZHH3SB6SCTLBR26W2" alt="Vulnerabilities">
 <div align="center">
   <img src="https://img.shields.io/badge/License-MIT-0aa8d2" alt="MIT"/>
   <img src="https://badge.fury.io/js/vue-material-tabs.svg" alt="npm Version"/>
   <img src="https://snyk.io/test/github/jairoblatt/vue-material-tabs/badge.svg" alt="Vulnerabilities">
-  <p>My awesome description here</p>
+  <p>A smart and light radial progress bar component for Vue 3. </p>
 </div>
 
-### [Demo](https://vue3-radial-progress.vercel.app/)
+>The [original project](https://github.com/wyzantinc/vue-radial-progress) it's only available to vue 1 and 2, so i decided rewrite it to vue 3.
+
+### [Live Demo](https://vue3-radial-progress.vercel.app/)
 
 
 
