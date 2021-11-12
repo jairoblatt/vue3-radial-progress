@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/jairoblatt/vue3-radial-progress/master/demo/assets/demo-1.png?token=AKYEY6RBP5QZZHH3SB6SCTLBR26W2" alt="Vulnerabilities">
+<img src="https://github.com/jairoblatt/vue3-radial-progress/blob/master/demo/assets/demo-1.png" alt="Demo 1">
 <div align="center">
   <img src="https://img.shields.io/badge/License-MIT-0aa8d2" alt="MIT"/>
   <img src="https://badge.fury.io/js/vue-material-tabs.svg" alt="npm Version"/>
