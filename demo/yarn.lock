@@ -6912,6 +6912,11 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
 
+vue3-radial-progress@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/vue3-radial-progress/-/vue3-radial-progress-1.0.0.tgz#ef7e7218e0c8ab13f859786b72fd96c8f76135d2"
+  integrity sha512-QRvE0RvyQenBXjZBiZR49SoeQ3h2bijM9DVO6iMcFAEb5JVR6a6jr4ajNRPjmv7u6k5orgKeFGjX2pnr/Y+mtw==
+
 vue@^3.0.0:
   version "3.2.21"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.21.tgz#55f5665172d95cf97e806b9aad0a375180be23a1"

@@ -7,7 +7,7 @@
 
     <div class="app__content">
       <div class="content__radial">
-        <gradientProgress
+        <GradientProgress
           :diameter="diameter"
           :total-steps="totalSteps"
           :completed-steps="completedSteps"
@@ -25,7 +25,7 @@
             <small>Completed steps: </small>
             <span>{{ completedSteps }} / {{ totalSteps }}</span>
           </div>
-        </gradientProgress>
+        </GradientProgress>
         <div class="content__controls">
           <button :disabled="completedSteps <= 0" @click.prevent="completedSteps--">Prev</button>
           <button :disabled="completedSteps >= totalSteps" @click.prevent="completedSteps++">Next</button>
@@ -69,15 +69,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-// @ts-ignore
-import gradientProgress from "../../dist/RadialProgressBar.esm";
-import Input from "../../dev/components/Input.vue";
-import { StrokeLinecap } from "../../dist/types/src/types";
+import GradientProgress, { StrokeLinecap } from "vue3-radial-progress";
+import Input from "@/components/Input.vue";
 
 export default defineComponent({
   name: "App",
   components: {
-    gradientProgress,
+    GradientProgress,
     Input,
   },
 
