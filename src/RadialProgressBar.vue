@@ -141,7 +141,7 @@ export default defineComponent({
 
     const strokeDashoffset = ref(0);
     const currentAngle = ref(0);
-    const gradientAnimation = ref<NodeJS.Timer | null>(null);
+    const gradientAnimation = ref<number | null>(null);
 
     const radius = computed(() => props.diameter / 2);
     const innerCircleDiameter = computed(() => props.diameter - props.innerStrokeWidth * 2);
@@ -210,6 +210,7 @@ export default defineComponent({
       const incrementer = Math.abs(i - totalPoints.value) / totalPoints.value;
       const isMoveForward = i < totalPoints.value;
 
+      // @ts-ignore
       gradientAnimation.value = setInterval(() => {
         if ((isMoveForward && i >= totalPoints.value) || (!isMoveForward && i < totalPoints.value)) {
           gradientAnimation.value && clearInterval(gradientAnimation.value);
