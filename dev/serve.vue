@@ -51,7 +51,7 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
-import RadialProgressBar from "@/RadialProgressBar.vue";
+import RadialProgressBar from "@/RadialProgress.vue";
 import { StrokeLinecap } from "@/types";
 import Input from "../demo/src/Input.vue";
 
