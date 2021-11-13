@@ -3,6 +3,7 @@
   "version": "1.0.4",
   "description": "A smart and light radial progress bar component for Vue 3.",
   "author": "Jairo Blatt <jairoblatt@gmail.com>",
+  "license": "MIT",
   "main": "dist/RadialProgressBar.ssr.js",
   "browser": "dist/RadialProgressBar.esm.js",
   "module": "dist/RadialProgressBar.esm.js",
