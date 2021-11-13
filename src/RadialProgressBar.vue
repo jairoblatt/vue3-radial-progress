@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { computed, reactive, ref, watch, defineComponent, PropType } from "vue";
-import { StrokeLinecap, GradientAnimation, Style } from "./types";
+import { StrokeLinecap, Style } from "./types";
 
 export default defineComponent({
   props: {
@@ -141,7 +141,7 @@ export default defineComponent({
 
     const strokeDashoffset = ref(0);
     const currentAngle = ref(0);
-    const gradientAnimation = ref<GradientAnimation>(null);
+    const gradientAnimation = ref<NodeJS.Timer | null>(null);
 
     const radius = computed(() => props.diameter / 2);
     const innerCircleDiameter = computed(() => props.diameter - props.innerStrokeWidth * 2);
