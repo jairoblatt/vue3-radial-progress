@@ -50,12 +50,12 @@ export default {
 
 ```html
 <template>
-  <radial-progress-bar 
+  <RadialProgress 
    :diameter="200"
    :completed-steps="completedSteps"
    :total-steps="totalSteps">
     <!-- Your inner content here -->
-  </radial-progress-bar>
+  </RadialProgress>
 </template>
 
 <script>

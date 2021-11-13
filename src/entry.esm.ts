@@ -2,7 +2,7 @@ import { App, Plugin } from "vue";
 export * from "./types";
 
 // Import vue component
-import component from "@/RadialProgressBar.vue";
+import component from "@/RadialProgress.vue";
 
 // Define typescript interfaces for installable component
 type InstallableComponent = typeof component & { install: Exclude<Plugin["install"], undefined> };
