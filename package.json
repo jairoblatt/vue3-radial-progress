@@ -1,6 +1,6 @@
 {
   "name": "vue3-radial-progress",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A smart and light radial progress bar component for Vue 3.",
   "author": "Jairo Blatt <jairoblatt@gmail.com>",
   "main": "dist/RadialProgressBar.ssr.js",
