@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "vue": "^3.2.16",
-    "vue3-radial-progress": "^1.0.3"
+    "vue3-radial-progress": "^1.0.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
