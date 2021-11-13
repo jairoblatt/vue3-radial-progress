@@ -866,10 +866,10 @@ vue-tsc@^0.3.0:
   dependencies:
     vscode-vue-languageservice "^0.27.0"
 
-vue3-radial-progress@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/vue3-radial-progress/-/vue3-radial-progress-1.0.1.tgz#cba16af78a9ff88e68f24f726402cdaa5dbcb027"
-  integrity sha512-NLJ6Rzq4fHbrQ4HdPcPVPRZfCm5vdVKBSrXIcqxfY4CZqTvlMgIIEfIC8Di38uPDT0skmf3WDAsbbiTVttM9Jw==
+vue3-radial-progress@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/vue3-radial-progress/-/vue3-radial-progress-1.0.3.tgz#06ef00ef0d34644ba430c8678cd4d2c92611bc4e"
+  integrity sha512-vffwimIUHtfIXR2N844miP2br/dVzvG/m1n5M0+crnhUy8ne1uWijeWLBLmRthawXm3RfFayLL4/r0JR62S9QQ==
 
 vue@^3.2.16:
   version "3.2.21"
