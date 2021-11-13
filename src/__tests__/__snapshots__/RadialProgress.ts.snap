@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadialProgress.vue Should mount the component 1`] = `
+"<div class=\\"vrp__wrapper\\" style=\\"height: 200px; width: 200px;\\">
+  <div class=\\"vrp__inner\\" style=\\"width: 180px;\\"></div><svg width=\\"200\\" height=\\"200\\" version=\\"1.1\\" xmlns=\\"http://www.w3.org/2000/svg\\">
+    <defs>
+      <radialGradient id=\\"radial-gradient\\" fx=\\"0.99\\" fy=\\"0.5\\" cx=\\"0.5\\" cy=\\"0.5\\" r=\\"0.65\\">
+        <stop offset=\\"30%\\" stop-color=\\"#00C58E\\"></stop>
+        <stop offset=\\"100%\\" stop-color=\\"#00E0A1\\"></stop>
+      </radialGradient>
+    </defs>
+    <circle r=\\"90\\" cx=\\"100\\" cy=\\"100\\" fill=\\"transparent\\" stroke=\\"#2F495E\\" stroke-dasharray=\\"565.4866776461628\\" stroke-dashoffset=\\"0\\" stroke-linecap=\\"round\\" style=\\"height: 200px; width: 200px; stroke-width: 10px;\\"></circle>
+    <circle transform=\\"rotate(270, 100,100)\\" r=\\"90\\" cx=\\"100\\" cy=\\"100\\" fill=\\"transparent\\" stroke=\\"url('#radial-gradient')\\" stroke-dasharray=\\"565.4866776461628\\" stroke-dashoffset=\\"565.4866776461628\\" stroke-linecap=\\"round\\" style=\\"height: 200px; width: 200px; stroke-width: 10px; stroke-dashoffset: 565.4866776461628; transition: stroke-dashoffset 1000ms linear;\\"></circle>
+  </svg>
+</div>"
+`;

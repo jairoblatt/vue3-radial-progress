@@ -1,9 +1,9 @@
 import { mount } from "@vue/test-utils";
-import RadialProgressBar from "../RadialProgressBar.vue";
+import RadialProgress from "../RadialProgress.vue";
 
-describe("RadialProgressBar.vue", () => {
+describe("RadialProgress.vue", () => {
   function mountFunction(options = {}) {
-    return mount(RadialProgressBar, { ...options });
+    return mount(RadialProgress, { ...options });
   }
 
   it("Should mount the component", () => {
