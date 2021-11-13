@@ -1,9 +1,10 @@
 <img src="https://github.com/jairoblatt/vue3-radial-progress/blob/master/demo/src/assets/demo-1.png" alt="Demo">
 <div align="center">
   <img src="https://img.shields.io/badge/License-MIT-0aa8d2" alt="MIT"/>
-  <img src="https://badge.fury.io/js/vue-material-tabs.svg" alt="npm Version"/>
+<img src="https://badge.fury.io/js/vue3-radial-progress.svg" alt="npm version" height="18">
   <img src="https://snyk.io/test/github/jairoblatt/vue-material-tabs/badge.svg" alt="Vulnerabilities">
-  <p>A smart and light radial progress bar component for Vue 3. </p>
+  <p >A smart and light radial progress bar component for Vue 3.</p>
+  <br/>
 </div>
 
 >The [original project](https://github.com/wyzantinc/vue-radial-progress) it's only available to vue 1 and 2, so i decided rewrite it to vue 3.
@@ -23,20 +24,24 @@
 ### Global
 
 ```javascript
-import Vue from "vue";
-import RadialProgressBar from "vue3-radial-progress";
+import { createApp } from 'vue';
+import RadialProgress from "vue3-radial-progress";
 
-Vue.use(RadialProgressBar);
+// Your app instance here
+const app = createApp(App); 
+
+app.use(RadialProgress);
+
 ```
 
 ### Local
 
 ```javascript
-import RadialProgressBar from "vue3-radial-progress";
+import RadialProgress from "vue3-radial-progress";
 
 export default {
   components: {
-    RadialProgressBar
+    RadialProgress
   },
 };
 ```

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div class="app__header">
-      <h1>Vue 3 Radial Progress Bar</h1>
+      <h1>
+        <a href="https://github.com/jairoblatt/vue3-radial-progress" target="_blank">Vue 3 Radial Progress Bar</a>
+      </h1>
       <p>Customizable radial progress bar component with gradients and animations!</p>
     </div>
 
@@ -45,19 +47,19 @@
         </div>
 
         <div class="options__item">
-          <div>
+          <div class="item__color">
             <span>Start color</span>
             <input v-model="startColor" type="color" placeholder="Start color" />
           </div>
-          <div>
+          <div class="item__color">
             <span>Stop color</span>
             <input v-model="stopColor" type="color" placeholder="Stop color" />
           </div>
-          <div>
+          <div class="item__color">
             <span>Inner stroke color</span>
             <input v-model="innerStrokeColor" type="color" placeholder="Inner stroke color" />
           </div>
-          <div>
+          <div class="item__color">
             <span>Clockwise</span>
             <input type="checkbox" :checked="isClockwise" @input="isClockwiseChanged" />
           </div>
@@ -70,7 +72,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import GradientProgress, { StrokeLinecap } from "vue3-radial-progress";
-import Input from "@/components/Input.vue";
+import Input from "./Input.vue";
 
 export default defineComponent({
   name: "App",
@@ -102,135 +104,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&display=swap");
-
-body,
-html,
-#app {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Quicksand", sans-serif;
-}
-
-h1,
-p,
-small,
-span {
-  margin: 0;
-}
-
-:root {
-  --shadow: black;
-  --primary: #141625;
-  --secondary: #141625;
-  --green-1: #00c58e;
-  --green-2: #00e0a1;
-  --shadow: 20px 20px 60px rgba(0, 0, 0, 0.192);
-}
-</style>
-
-<style scoped>
-#app {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  flex-direction: column;
-  background: #141625;
-  padding: 1rem 20rem 5rem 20rem;
-}
-
-.app__header {
-  background: #1f213a;
-  text-align: center;
-  margin-bottom: 2rem;
-  padding: 1.2rem 1.4rem;
-  border-radius: 7px;
-  color: white;
-  box-shadow: var(--shadow);
-}
-
-.app__header p {
-  margin-top: 1rem;
-}
-
-.app__content {
-  padding: 1.5rem 2rem;
-  border-radius: 7px;
-  background: #1f213a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-shadow: var(--shadow);
-}
-
-.content__radial {
-  color: white;
-}
-
-.content__radial div:first-child {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.content__radial div small {
-  font-size: 1.3rem;
-  margin-right: 5px;
-}
-
-.content__radial div span {
-  font-size: 2rem;
-}
-.content__controls {
-  display: flex;
-  justify-content: space-around;
-  margin: 2rem 0;
-}
-.content__controls button {
-  outline: none;
-  border: none;
-  padding: 0.4rem 2rem;
-  font-size: 1.3rem;
-  background: var(--green-2);
-  border-radius: 2px;
-  color: white;
-  cursor: pointer;
-  transition: transform ease-in 0.14s;
-}
-
-.content__controls button:hover:not(:disabled) {
-  transform: scale(1.09);
-}
-.content__controls button:disabled {
-  background: rgb(131, 131, 131);
-}
-
-.content__options {
-  color: white;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-
-.options__item {
-  display: flex;
-  margin: 1rem 0;
-}
-
-.options__item span {
-  margin-bottom: 1rem;
-}
-
-.options__item div {
-  margin-left: 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-</style>
