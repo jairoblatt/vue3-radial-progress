@@ -7,7 +7,7 @@
   <br/>
 </div>
 
->The [original project](https://github.com/wyzantinc/vue-radial-progress) it's only available to vue 1 and 2, so i decided rewrite it to vue 3.
+>[The original project](https://github.com/wyzantinc/vue-radial-progress) only works with Vue 1 and 2, so I decided to rewrite it for Vue 3.
 
 ### [Live Demo](https://vue3-radial-progress.vercel.app/)
 
