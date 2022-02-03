@@ -52,7 +52,7 @@
 <script lang="ts">
 import { defineComponent, reactive } from "vue";
 import RadialProgressBar from "@/RadialProgress.vue";
-import { StrokeLinecap } from "@/types";
+import type { StrokeLinecap } from "@/types";
 import Input from "../demo/src/Input.vue";
 
 export default defineComponent({
@@ -69,7 +69,7 @@ export default defineComponent({
       totalSteps: 6,
       animateSpeed: 1000,
       diameter: 300,
-      strokeWidth: 10,
+      strokeWidth: 6,
       innerStrokeWidth: 10,
       strokeLinecap: "round" as StrokeLinecap,
       startColor: "#00C58E",

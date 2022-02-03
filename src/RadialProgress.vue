@@ -1,48 +1,7 @@
-<template>
-  <div class="vrp__wrapper" :style="containerStyle">
-    <div class="vrp__inner" :style="innerCircleStyle">
-      <slot></slot>
-    </div>
-
-    <svg :width="diameter" :height="diameter" version="1.1" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <radialGradient id="radial-gradient" :fx="gradient.fx" :fy="gradient.fy" :cx="gradient.cx" :cy="gradient.cy" :r="gradient.r">
-          <stop offset="30%" :stop-color="startColor" />
-          <stop offset="100%" :stop-color="stopColor" />
-        </radialGradient>
-      </defs>
-
-      <circle
-        :r="innerCircleRadius"
-        :cx="radius"
-        :cy="radius"
-        fill="transparent"
-        :stroke="innerStrokeColor"
-        :stroke-dasharray="circumference"
-        stroke-dashoffset="0"
-        :stroke-linecap="strokeLinecap"
-        :style="strokeStyle"
-      ></circle>
-
-      <circle
-        :transform="'rotate(270, ' + radius + ',' + radius + ')'"
-        :r="innerCircleRadius"
-        :cx="radius"
-        :cy="radius"
-        fill="transparent"
-        stroke="url('#radial-gradient')"
-        :stroke-dasharray="circumference"
-        :stroke-dashoffset="circumference"
-        :stroke-linecap="strokeLinecap"
-        :style="progressStyle"
-      ></circle>
-    </svg>
-  </div>
-</template>
-
 <script lang="ts">
-import { computed, reactive, ref, watch, defineComponent, PropType } from "vue";
-import { StrokeLinecap, Style } from "./types";
+import { computed, reactive, ref, watch, defineComponent } from "vue";
+import type { StrokeLinecap, Style } from "./types";
+import type { PropType } from "vue";
 
 export default defineComponent({
   props: {
@@ -240,6 +199,48 @@ export default defineComponent({
   },
 });
 </script>
+
+<template>
+  <div class="vrp__wrapper" :style="containerStyle">
+    <div class="vrp__inner" :style="innerCircleStyle">
+      <slot></slot>
+    </div>
+
+    <svg :width="diameter" :height="diameter" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="radial-gradient" :fx="gradient.fx" :fy="gradient.fy" :cx="gradient.cx" :cy="gradient.cy" :r="gradient.r">
+          <stop offset="30%" :stop-color="startColor" />
+          <stop offset="100%" :stop-color="stopColor" />
+        </radialGradient>
+      </defs>
+
+      <circle
+        :r="innerCircleRadius"
+        :cx="radius"
+        :cy="radius"
+        fill="transparent"
+        :stroke="innerStrokeColor"
+        :stroke-dasharray="circumference"
+        stroke-dashoffset="0"
+        :stroke-linecap="strokeLinecap"
+        :style="strokeStyle"
+      ></circle>
+
+      <circle
+        :transform="'rotate(270, ' + radius + ',' + radius + ')'"
+        :r="innerCircleRadius"
+        :cx="radius"
+        :cy="radius"
+        fill="transparent"
+        stroke="url('#radial-gradient')"
+        :stroke-dasharray="circumference"
+        :stroke-dashoffset="circumference"
+        :stroke-linecap="strokeLinecap"
+        :style="progressStyle"
+      ></circle>
+    </svg>
+  </div>
+</template>
 
 <style scoped>
 .vrp__wrapper {
