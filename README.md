@@ -27,9 +27,7 @@
 import { createApp } from 'vue';
 import RadialProgress from "vue3-radial-progress";
 
-// Your app instance here
 const app = createApp(App); 
-
 app.use(RadialProgress);
 
 ```

@@ -1,5 +1,6 @@
 <script lang="ts">
 import { computed, reactive, ref, watch, defineComponent } from "vue";
+import { randomString } from "./utils";
 import type { StrokeLinecap, Style } from "./types";
 import type { PropType } from "vue";
 
@@ -98,6 +99,8 @@ export default defineComponent({
       r: 0.65,
     });
 
+    const radialGradientId = `rg-${randomString()}`;
+
     const strokeDashoffset = ref(0);
     const currentAngle = ref(0);
     const gradientAnimation = ref<number | null>(null);
@@ -169,7 +172,6 @@ export default defineComponent({
       const incrementer = Math.abs(i - totalPoints.value) / totalPoints.value;
       const isMoveForward = i < totalPoints.value;
 
-      // @ts-ignore
       gradientAnimation.value = setInterval(() => {
         if ((isMoveForward && i >= totalPoints.value) || (!isMoveForward && i < totalPoints.value)) {
           gradientAnimation.value && clearInterval(gradientAnimation.value);
@@ -180,12 +182,13 @@ export default defineComponent({
         gotoPoint();
 
         i += isMoveForward ? incrementer : -incrementer;
-      }, animationIncrements.value);
+      }, animationIncrements.value) as any;
     }
 
     return {
       gradientAnimation,
       innerCircleRadius,
+      radialGradientId,
       strokeDashoffset,
       innerCircleStyle,
       containerStyle,
@@ -208,7 +211,7 @@ export default defineComponent({
 
     <svg :width="diameter" :height="diameter" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient id="radial-gradient" :fx="gradient.fx" :fy="gradient.fy" :cx="gradient.cx" :cy="gradient.cy" :r="gradient.r">
+        <radialGradient :id="radialGradientId" :fx="gradient.fx" :fy="gradient.fy" :cx="gradient.cx" :cy="gradient.cy" :r="gradient.r">
           <stop offset="30%" :stop-color="startColor" />
           <stop offset="100%" :stop-color="stopColor" />
         </radialGradient>
@@ -232,7 +235,7 @@ export default defineComponent({
         :cx="radius"
         :cy="radius"
         fill="transparent"
-        stroke="url('#radial-gradient')"
+        :stroke="`url('#${radialGradientId}')`"
         :stroke-dasharray="circumference"
         :stroke-dashoffset="circumference"
         :stroke-linecap="strokeLinecap"
