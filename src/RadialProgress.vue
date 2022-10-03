@@ -1,217 +1,150 @@
-<script lang="ts">
-import { computed, reactive, ref, watch, defineComponent } from "vue";
-import { randomString } from "./utils";
-import type { StrokeLinecap, Style } from "./types";
-import type { PropType } from "vue";
+<script lang="ts" setup>
+  import { computed, reactive, ref, watch, withDefaults, defineProps } from 'vue';
+  import { createId, toNumber } from './shared';
+  import type { Numberish, Nullable } from './types';
 
-export default defineComponent({
-  props: {
-    // Sets width/diameter of the inner stroke.
-    diameter: {
-      type: Number as PropType<number>,
-      required: false,
-      default: 200,
-    },
-    // Sets the total steps/progress to the end.
-    totalSteps: {
-      type: Number as PropType<number>,
-      required: true,
-      default: 10,
-    },
-    // Sets the current progress of the inner stroke.
-    completedSteps: {
-      type: Number as PropType<number>,
-      required: true,
-      default: 0,
-    },
-    // Sets the start color of the inner stroke (gradient).
-    startColor: {
-      type: String as PropType<string>,
-      required: false,
-      default: "#00C58E",
-    },
-    // Sets the end color of the inner stroke (gradient).
-    stopColor: {
-      type: String as PropType<string>,
-      required: false,
-      default: "#00E0A1",
-    },
-    // Sets the color of the inner stroke to be applied to the shape.
-    innerStrokeColor: {
-      type: String as PropType<string>,
-      required: false,
-      default: "#2F495E",
-    },
-    // Sets the width of the stroke to be applied to the shape.
-    // Read more: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width
-    strokeWidth: {
-      type: Number as PropType<number>,
-      required: false,
-      default: 10,
-    },
-    // Sets the  width of the inner stroke to be applied to the shape.
-    innerStrokeWidth: {
-      type: Number as PropType<number>,
-      required: false,
-      default: 10,
-    },
-    // Sets the shape to be used at the end of stroked.
-    // Read more: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap
-    strokeLinecap: {
-      type: String as PropType<StrokeLinecap>,
-      required: false,
-      default: "round",
-    },
-    // Sets how long the animation should take to complete one cycle.
-    // Read more: https://www.w3schools.com/cssref/css3_pr_animation-duration.asp
-    animateSpeed: {
-      type: Number as PropType<number>,
-      required: false,
-      default: 1000,
-    },
-    // Sets the frames per seconds to update inner stroke animation.
-    fps: {
-      type: Number as PropType<number>,
-      required: false,
-      default: 60,
-    },
-    // Sets how the animation progresses through the duration of each cycle.
-    // Read more: https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timing-function
-    timingFunc: {
-      type: String as PropType<string>,
-      required: false,
-      default: "linear",
-    },
-    // Sets the inner stroke direction.
-    isClockwise: {
-      type: Boolean as PropType<boolean>,
-      required: false,
-      default: true,
-    },
-  },
+  export interface Props {
+    diameter?: Numberish;
+    totalSteps?: Numberish;
+    completedSteps?: Numberish;
+    startColor?: string;
+    stopColor?: string;
+    innerStrokeColor?: Numberish;
+    strokeWidth?: Numberish;
+    innerStrokeWidth?: Numberish;
+    strokeLinecap?: string;
+    animateSpeed?: Numberish;
+    fps?: Numberish;
+    timingFunc?: string;
+    isClockwise?: boolean;
+  }
 
-  setup(props) {
-    const gradient = reactive({
-      fx: 0.99,
-      fy: 0.5,
-      cx: 0.5,
-      cy: 0.5,
-      r: 0.65,
-    });
+  const props = withDefaults(defineProps<Props>(), {
+    diameter: 200,
+    totalSteps: 10,
+    completedSteps: 0,
+    startColor: '#00C58E',
+    stopColor: '#00E0A1',
+    innerStrokeColor: '#2F495E',
+    strokeWidth: 10,
+    innerStrokeWidth: 10,
+    strokeLinecap: 'round',
+    animateSpeed: 1000,
+    fps: 60,
+    timingFunc: 'linear',
+    isClockwise: true,
+  });
 
-    const radialGradientId = `rg-${randomString()}`;
+  const gradient = reactive({
+    fx: 0.99,
+    fy: 0.5,
+    cx: 0.5,
+    cy: 0.5,
+    r: 0.65,
+  });
 
-    const strokeDashoffset = ref(0);
-    const currentAngle = ref(0);
-    const gradientAnimation = ref<number | null>(null);
+  const strokeDashoffset = ref(0);
+  const currentAngle = ref(0);
+  const gradientAnimation = ref<Nullable<number>>(null);
+  const id = createId();
 
-    const radius = computed(() => props.diameter / 2);
-    const innerCircleDiameter = computed(() => props.diameter - props.innerStrokeWidth * 2);
-    const circumference = computed(() => Math.PI * innerCircleDiameter.value);
-    const stepSize = computed(() => (props.totalSteps === 0 ? 0 : 100 / props.totalSteps));
-    const finishedPercentage = computed(() => stepSize.value * props.completedSteps);
-    const circleSlice = computed(() => (2 * Math.PI) / props.totalSteps);
-    const animationIncrements = computed(() => 100 / props.fps);
-    const totalPoints = computed(() => props.animateSpeed / animationIncrements.value);
-    const animateSlice = computed(() => circleSlice.value / totalPoints.value);
-    const innerCircleRadius = computed(() => innerCircleDiameter.value / 2);
+  const radius = computed(() => toNumber(props.diameter) / 2);
+  const innerCircleDiameter = computed(() => {
+    return toNumber(props.diameter) - toNumber(props.innerStrokeWidth) * 2;
+  });
+  const circumference = computed(() => Math.PI * innerCircleDiameter.value);
+  const stepSize = computed(() => (props.totalSteps === 0 ? 0 : 100 / toNumber(props.totalSteps)));
+  const finishedPercentage = computed(() => stepSize.value * toNumber(props.completedSteps));
+  const circleSlice = computed(() => (2 * Math.PI) / toNumber(props.totalSteps));
+  const animationIncrements = computed(() => 100 / toNumber(props.fps));
+  const totalPoints = computed(() => toNumber(props.animateSpeed) / animationIncrements.value);
+  const animateSlice = computed(() => circleSlice.value / totalPoints.value);
+  const innerCircleRadius = computed(() => innerCircleDiameter.value / 2);
 
-    const containerStyle = computed<Style>(() => ({
-      height: `${props.diameter}px`,
-      width: `${props.diameter}px`,
-    }));
+  const containerStyle = computed(() => ({
+    height: `${props.diameter}px`,
+    width: `${props.diameter}px`,
+  }));
 
-    const progressStyle = computed<Style>(() => ({
-      height: `${props.diameter}px`,
-      width: `${props.diameter}px`,
-      strokeWidth: `${props.strokeWidth}px`,
-      strokeDashoffset: strokeDashoffset.value,
-      transition: `stroke-dashoffset ${props.animateSpeed}ms ${props.timingFunc}`,
-    }));
+  const progressStyle = computed(() => ({
+    height: `${props.diameter}px`,
+    width: `${props.diameter}px`,
+    strokeWidth: `${props.strokeWidth}px`,
+    strokeDashoffset: strokeDashoffset.value,
+    transition: `stroke-dashoffset ${props.animateSpeed}ms ${props.timingFunc}`,
+  }));
 
-    const strokeStyle = computed<Style>(() => ({
-      height: `${props.diameter}px`,
-      width: `${props.diameter}px`,
-      strokeWidth: `${props.innerStrokeWidth}px`,
-    }));
+  const strokeStyle = computed(() => ({
+    height: `${props.diameter}px`,
+    width: `${props.diameter}px`,
+    strokeWidth: `${props.innerStrokeWidth}px`,
+  }));
 
-    const innerCircleStyle = computed<Style>(() => ({
-      width: `${innerCircleDiameter.value}px`,
-    }));
+  const innerCircleStyle = computed(() => ({
+    width: `${innerCircleDiameter.value}px`,
+  }));
 
-    watch(() => [props.diameter, props.totalSteps, props.completedSteps, props.strokeWidth], changeProgress, { immediate: true });
+  watch(
+    () => [props.diameter, props.totalSteps, props.completedSteps, props.strokeWidth],
+    changeProgress,
+    { immediate: true }
+  );
 
-    function getPointOfCircle(angle: number) {
-      const radius = 0.5;
-      const x = radius + radius * Math.cos(angle);
-      const y = radius + radius * Math.sin(angle);
-      return { x, y };
+  function getPointOfCircle(angle: number) {
+    const radius = 0.5;
+    const x = radius + radius * Math.cos(angle);
+    const y = radius + radius * Math.sin(angle);
+    return { x, y };
+  }
+
+  function gotoPoint() {
+    const point = getPointOfCircle(currentAngle.value);
+    if (point.x && point.y) {
+      gradient.fx = point.x;
+      gradient.fy = point.y;
+    }
+  }
+
+  function direction() {
+    return props.isClockwise ? 1 : -1;
+  }
+
+  function changeProgress() {
+    strokeDashoffset.value =
+      ((100 - finishedPercentage.value) / 100) * circumference.value * direction();
+
+    if (gradientAnimation.value) {
+      clearInterval(gradientAnimation.value);
     }
 
-    function gotoPoint() {
-      const point = getPointOfCircle(currentAngle.value);
-      if (point.x && point.y) {
-        gradient.fx = point.x;
-        gradient.fy = point.y;
-      }
-    }
+    const angleOffset = (toNumber(props.completedSteps) - 1) * circleSlice.value;
+    let i = (currentAngle.value - angleOffset) / animateSlice.value;
+    const incrementer = Math.abs(i - totalPoints.value) / totalPoints.value;
+    const isMoveForward = i < totalPoints.value;
 
-    function direction() {
-      return props.isClockwise ? 1 : -1;
-    }
-
-    function changeProgress() {
-      strokeDashoffset.value = ((100 - finishedPercentage.value) / 100) * circumference.value * direction();
-
-      if (gradientAnimation.value) {
-        clearInterval(gradientAnimation.value);
+    gradientAnimation.value = setInterval(() => {
+      if ((isMoveForward && i >= totalPoints.value) || (!isMoveForward && i < totalPoints.value)) {
+        gradientAnimation.value && clearInterval(gradientAnimation.value);
+        return;
       }
 
-      const angleOffset = (props.completedSteps - 1) * circleSlice.value;
-      let i = (currentAngle.value - angleOffset) / animateSlice.value;
-      const incrementer = Math.abs(i - totalPoints.value) / totalPoints.value;
-      const isMoveForward = i < totalPoints.value;
+      currentAngle.value = angleOffset + animateSlice.value * i;
+      gotoPoint();
 
-      gradientAnimation.value = setInterval(() => {
-        if ((isMoveForward && i >= totalPoints.value) || (!isMoveForward && i < totalPoints.value)) {
-          gradientAnimation.value && clearInterval(gradientAnimation.value);
-          return;
-        }
-
-        currentAngle.value = angleOffset + animateSlice.value * i;
-        gotoPoint();
-
-        i += isMoveForward ? incrementer : -incrementer;
-      }, animationIncrements.value) as any;
-    }
-
-    return {
-      gradientAnimation,
-      innerCircleRadius,
-      radialGradientId,
-      strokeDashoffset,
-      innerCircleStyle,
-      containerStyle,
-      circumference,
-      progressStyle,
-      currentAngle,
-      strokeStyle,
-      gradient,
-      radius,
-    };
-  },
-});
+      i += isMoveForward ? incrementer : -incrementer;
+    }, animationIncrements.value) as any;
+  }
 </script>
 
 <template>
   <div class="vrp__wrapper" :style="containerStyle">
     <div class="vrp__inner" :style="innerCircleStyle">
-      <slot></slot>
+      <slot />
     </div>
 
     <svg :width="diameter" :height="diameter" version="1.1" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <radialGradient :id="radialGradientId" :fx="gradient.fx" :fy="gradient.fy" :cx="gradient.cx" :cy="gradient.cy" :r="gradient.r">
+        <radialGradient v-bind="{ id, ...gradient }">
           <stop offset="30%" :stop-color="startColor" />
           <stop offset="100%" :stop-color="stopColor" />
         </radialGradient>
@@ -235,7 +168,7 @@ export default defineComponent({
         :cx="radius"
         :cy="radius"
         fill="transparent"
-        :stroke="`url('#${radialGradientId}')`"
+        :stroke="`url('#${id}')`"
         :stroke-dasharray="circumference"
         :stroke-dashoffset="circumference"
         :stroke-linecap="strokeLinecap"
@@ -246,21 +179,30 @@ export default defineComponent({
 </template>
 
 <style scoped>
-.vrp__wrapper {
-  position: relative;
-}
+  .vrp__wrapper {
+    position: relative;
+  }
 
-.vrp__inner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  border-radius: 50%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
+  .vrp__inner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
 </style>
