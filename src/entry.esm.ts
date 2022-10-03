@@ -1,11 +1,11 @@
-import { App, Plugin } from "vue";
-export * from "./types";
+import type { App, Plugin } from 'vue';
+export * from './types';
 
 // Import vue component
-import component from "@/RadialProgress.vue";
+import component from '@/RadialProgress.vue';
 
 // Define typescript interfaces for installable component
-type InstallableComponent = typeof component & { install: Exclude<Plugin["install"], undefined> };
+type InstallableComponent = typeof component & { install: Exclude<Plugin['install'], undefined> };
 
 // Default export is installable instance of component.
 // IIFE injects install function into component, allowing component
@@ -16,7 +16,7 @@ export default /*#__PURE__*/ ((): InstallableComponent => {
 
   // Attach install function executed by Vue.use()
   installable.install = (app: App) => {
-    app.component("RadialProgressBar", installable);
+    app.component('RadialProgressBar', installable);
   };
   return installable;
 })();
